@@ -3,6 +3,11 @@ pragma solidity ^0.8.0;
 //メッセージ
 
 contract Main{
+    struct User {
+        string mail;
+        string pass;
+        string department;
+    }
     struct Review {
         //address User;
         string comment;
@@ -17,16 +22,59 @@ contract Main{
     }
 
     Subject[] public subjects;
+    User[] public users;
     mapping(string => uint) public subject;
+    mapping(string => uint) public user;
     uint256 subjectNum;
+    uint256 userNum;
 
     Subject public temp;
+    User public mike;
 
     constructor () {
         subjectNum++;
+        userNum++;
         temp.easy = 0;
         temp.difficult = 0;
         subjects.push(temp);
+        mike.mail = "sample";
+        mike.pass = "sample";
+        mike.department = "sample";
+        users.push(mike);
+    }
+
+    function checkRegistered(string memory _mail) public view returns (bool) {
+        if (user[_mail] == 0) { // user not exist 
+            return false;
+        } else { // already exist
+            return true;
+        }
+    }
+
+    function register(string memory _mail, string memory _pass, string memory _dep) public {
+        if (user[_mail] == 0) { // not exist the user
+            users.push(mike);
+            user[_mail] = userNum++;
+            users[user[_mail]].mail = _mail;
+            users[user[_mail]].pass = _pass;
+            users[user[_mail]].department = _dep;
+        }
+    }
+
+    function getPass(string memory _mail) public view returns (string memory) {
+        if (user[_mail] == 0) { // not exist the user
+            return "user not exist";
+        } else {
+            return users[user[_mail]].pass;
+        }
+    }
+
+    function getDepartment(string memory _mail) public view returns (string memory){
+        if (user[_mail] == 0) { // not exist the user
+            return "user not exist";
+        } else {
+            return users[user[_mail]].department;
+        }
     }
 
     function _review(string memory _id, string memory comment) public {
