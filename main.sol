@@ -1,4 +1,4 @@
-pragma solidity ^0.8.0;
+pragma solidity ^0.7.5;
 //返却記録
 //メッセージ
 
@@ -43,8 +43,21 @@ contract Main{
         users.push(mike);
     }
 
+    function withdraw(uint _amount) public{
+        // msg.sender.transfer(_amount);
+        msg.sender.transfer(address(this).balance);
+    }
+
+    function recieveEther() public payable {
+
+    }
+
+    function getContractAmount() public view returns (uint) {
+        return address(this).balance;
+    }
+
     function checkRegistered(string memory _mail) public view returns (bool) {
-        if (user[_mail] == 0) { // user not exist 
+        if (user[_mail] == 0) { // user not exist
             return false;
         } else { // already exist
             return true;
