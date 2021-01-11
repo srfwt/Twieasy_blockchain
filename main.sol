@@ -1,4 +1,4 @@
-// pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
 //返却記録
 //メッセージ
 
@@ -18,10 +18,16 @@ contract Main{
 
     Subject[] public subjects;
     mapping(string => uint) public subject;
-    uint256 subjectNum = 0;
+    uint256 subjectNum;
 
     Subject public temp;
 
+    constructor () {
+        subjectNum++;
+        temp.easy = 0;
+        temp.difficult = 0;
+        subjects.push(temp);
+    }
 
     function _review(string memory _id, string memory comment) public {
         if (subject[_id] != 0) {
@@ -74,10 +80,5 @@ contract Main{
             subjects[subject[_id]].ID = _id;
             subjects[subject[_id]].difficult++;
         }
-    }
-
-    constructor () public {
-        temp.easy = 0;
-        temp.difficult = 0;
     }
 }
