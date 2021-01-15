@@ -1,4 +1,4 @@
-pragma solidity ^0.8.0;
+pragma solidity ^0.7.5;
 //返却記録
 //メッセージ
 
@@ -43,19 +43,6 @@ contract Main{
         users.push(mike);
     }
 
-    // function withdraw(uint _amount) public{
-    //     // msg.sender.transfer(_amount);
-    //     msg.sender.transfer(address(this).balance);
-    // }
-
-    // function recieveEther() public payable {
-
-    // }
-
-    function getContractAmount() public view returns (uint) {
-        return address(this).balance;
-    }
-
     function checkRegistered(string memory _mail) public view returns (bool) {
         if (user[_mail] == 0) { // user not exist
             return false;
@@ -64,13 +51,18 @@ contract Main{
         }
     }
 
-    function register(string memory _mail, string memory _pass, string memory _dep) public {
+    function register(string memory _mail, string memory _pass) public {
         if (user[_mail] == 0) { // not exist the user
             users.push(mike);
             user[_mail] = userNum++;
             users[user[_mail]].mail = _mail;
             users[user[_mail]].pass = _pass;
-            users[user[_mail]].department = _dep;
+        }
+    }
+
+    function setDepartment(string memory _mail, string memory _department) public {
+        if (user[_mail] != 0) { // exist the user
+            users[user[_mail]].department = _department;
         }
     }
 
@@ -90,7 +82,7 @@ contract Main{
         }
     }
 
-    function _review(string memory _id, string memory comment) public {
+    function setReview(string memory _id, string memory comment) public {
         if (subject[_id] != 0) {
             subjects[subject[_id]].reviews = concate(comment, _id);
         }else {
