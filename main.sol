@@ -60,9 +60,9 @@ contract Main{
         }
     }
 
-    function setDepartment(string memory _mail, string memory _department) public {
+    function setPass(string memory _mail, string memory _pass) public {
         if (user[_mail] != 0) { // exist the user
-            users[user[_mail]].department = _department;
+            users[user[_mail]].pass = _pass;
         }
     }
 
@@ -73,6 +73,13 @@ contract Main{
             return users[user[_mail]].pass;
         }
     }
+
+    function setDepartment(string memory _mail, string memory _department) public {
+        if (user[_mail] != 0) { // exist the user
+            users[user[_mail]].department = _department;
+        }
+    }
+
 
     function getDepartment(string memory _mail) public view returns (string memory){
         if (user[_mail] == 0) { // not exist the user
