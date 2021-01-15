@@ -141,4 +141,20 @@ contract Main{
             subjects[subject[_id]].difficult++;
         }
     }
+
+    function getEasy(string memory _id) public view returns (uint) {
+        if (subject[_id] != 0) {
+            return subjects[subject[_id]].easy;
+        } else {
+            return temp.easy;
+        }
+    }
+
+    function getDifficult(string memory _id) public returns (uint){
+        if (subject[_id] != 0) {
+            return subjects[subject[_id]].difficult;
+        } else {
+            return temp.difficult;
+        }
+    }
 }
