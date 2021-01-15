@@ -1,4 +1,4 @@
-pragma solidity ^0.7.5;
+pragma solidity ^0.8.0;
 //返却記録
 //メッセージ
 
@@ -43,14 +43,14 @@ contract Main{
         users.push(mike);
     }
 
-    function withdraw(uint _amount) public{
-        // msg.sender.transfer(_amount);
-        msg.sender.transfer(address(this).balance);
-    }
+    // function withdraw(uint _amount) public{
+    //     // msg.sender.transfer(_amount);
+    //     msg.sender.transfer(address(this).balance);
+    // }
 
-    function recieveEther() public payable {
+    // function recieveEther() public payable {
 
-    }
+    // }
 
     function getContractAmount() public view returns (uint) {
         return address(this).balance;
